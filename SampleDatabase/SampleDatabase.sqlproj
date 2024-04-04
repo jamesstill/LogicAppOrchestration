@@ -64,8 +64,10 @@
     <Build Include="spWidgetDriver.sql" />
     <Build Include="spWidgetDelete.sql" />
     <Build Include="spWidgetUpsert.sql" />
+    <None Include="CreateTargetUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SeedWidgets.sql" />
+    <None Include="CreateSourceUser.sql" />
   </ItemGroup>
 </Project>

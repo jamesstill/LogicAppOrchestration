@@ -13,8 +13,23 @@ namespace TargetApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]PayloadDto payload)
         {
-            ReturnDto returnDto = await _repository.PostPayload(payload);
-            return Ok(returnDto);
+            try
+            {
+                ReturnDto returnDto = await _repository.PostPayload(payload);
+                return Ok(returnDto);
+            }
+            catch (Exception ex)
+            {
+                var details = new ProblemDetails
+                {
+                    Title = "Server Error",
+                    Status = StatusCodes.Status409Conflict,
+                    Detail = ex.Message,
+                    Instance = HttpContext.Request.Path
+                };
+
+                return Conflict(details);
+            }
         }
     }
 }
